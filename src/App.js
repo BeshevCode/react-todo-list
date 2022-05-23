@@ -15,6 +15,8 @@ function App() {
   //Run only once
   useEffect(() => {
     getLocalTodos();
+    filterHandler();
+    saveLocalTodos();
   }, []);
 
   //Use Effect
