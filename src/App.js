@@ -15,15 +15,14 @@ function App() {
   //Run only once
   useEffect(() => {
     getLocalTodos();
-    filterHandler();
-    saveLocalTodos();
   }, []);
 
   //Use Effect
   useEffect (() => {
-    filterHandler();
-    saveLocalTodos();
-  }, [todos, status]);
+      //Save to local storage
+  const saveLocalTodos = () => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+};
 
   //Functions
   const filterHandler = () => {
@@ -40,19 +39,21 @@ function App() {
     } 
   };
 
-  //Save to local storage
-  const saveLocalTodos = () => {
-        localStorage.setItem('todos', JSON.stringify(todos));
-  };
+filterHandler();
+saveLocalTodos();
+
+  }, [todos, status]);
+
   const getLocalTodos = () => {
-      if (localStorage.getItem('todos') === null) {
-        localStorage.setItem('todos', JSON.stringify([]));
-      }
-      else {
-        let todoLocal = JSON.parse(localStorage.getItem('todos'));
-        setTodos(todoLocal);
-      }
+    if (localStorage.getItem('todos') === null) {
+      localStorage.setItem('todos', JSON.stringify([]));
+    }
+    else {
+      let todoLocal = JSON.parse(localStorage.getItem('todos'));
+      setTodos(todoLocal);
+    }
   };
+
   return (
     <div className="App">
       <header>
